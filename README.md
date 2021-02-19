@@ -10,7 +10,7 @@ git clone https://github.com/PrincessAkira/discord-twitter-bot && cd discord-twi
 ```
 
 3. Install the bot
-   ```sh
+```sh
  npm install -g pm2 && npm install
  ```
 
