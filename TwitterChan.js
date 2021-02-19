@@ -22,6 +22,12 @@ var T = new Twit({
 })
 client.login(process.env.DISCORD_TOKEN);
 client.once('ready', () => {
+
+  client.user.setActivity("Moderating Sii-chans Twitter", {
+    type: "STREAMING",
+    url: "https://twitter.com/SiinoChan"
+  });
+
   var stream = T.stream('statuses/filter', {
     follow: [process.env.TWITTER_USER_ID]
   })

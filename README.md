@@ -1,6 +1,6 @@
 # discord-twitter-bot
 
-## How to use
+## How to Install
 
 1. Install [`Node.JS`](https://nodejs.org/en/download/current/).
 
@@ -18,3 +18,14 @@ git clone https://github.com/PrincessAkira/discord-twitter-bot && cd discord-twi
 ```sh
 npm start
 ```
+
+## How to stop
+
+1. Open Console
+```sh
+pm2 stop TwitterChan
+```
+
+## Screenshots
+
+
