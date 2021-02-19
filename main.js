@@ -25,13 +25,11 @@ client.once('ready', () => {
         tweet.in_reply_to_user_id ||
         tweet.in_reply_to_user_id_str ||
         tweet.in_reply_to_screen_name) {
-        console.log("Not noteworthy")
         return;
       } 
       else if (tweet.retweeted_status) {
         let channel = client.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
           channel.send("**Sii-chan retweeted: **" + url);
-          console.log("Basic retweet")
         }).catch(err => {
           console.log(err)
         })
@@ -40,7 +38,6 @@ client.once('ready', () => {
       else {
         let channel = client.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
           channel.send("**Sii-chan tweeted: **" + url);
-          console.log("Basic tweet")
         }).catch(err => {
           console.log(err)
         })
