@@ -1,12 +1,14 @@
 require('dotenv').config()
 const Twit = require('twit')
-const { exec } = require('child_process');
+const {
+  exec
+} = require('child_process');
 const Discord = require('discord.js');
 const TwitterChan = new Discord.Client();
 const cron = require('node-cron');
 
 // CronJob every 24 Hours at 0:00
-cron.schedule('0 0 * * *', function() {
+cron.schedule('0 0 * * *', function () {
   exec("pm2 restart TwitterChan")
 });
 
@@ -22,9 +24,11 @@ var T = new Twit({
 TwitterChan.login(process.env.DISCORD_TOKEN);
 TwitterChan.once('ready', () => {
 
-  TwitterChan.user.setActivity("Moderating Sii-chans Twitter", {
+  var TwitterName = tweet.user.screen_name
+
+  TwitterChan.user.setActivity("Moderating " + TwitterName + " Account", {
     type: "STREAMING",
-    url: "https://twitter.com/SiinoChan"
+    url: process.env.STATUS_URL
   });
 
   TwitterChan.user.setUsername(process.env.DISCORD_BOT_USERNAME)
@@ -33,30 +37,26 @@ TwitterChan.once('ready', () => {
     follow: [process.env.TWITTER_USER_ID]
   })
 
-  var TwitterName = tweet.user.screen_name
-  
   stream.on('tweet', function (tweet) {
     var url = "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str;
-      if (tweet.in_reply_to_status_id ||
-        tweet.in_reply_to_status_id_str ||
-        tweet.in_reply_to_user_id ||
-        tweet.in_reply_to_user_id_str ||
-        tweet.in_reply_to_screen_name) {
-        return;
-      } 
-      else if (tweet.retweeted_status) {
-        let channel = TwitterChan.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
-          channel.send(TwitterName + " **retweeted: **" + url);
-        }).catch(err => {
-          console.log(err)
-        })
-      }
-      
-      else {
-        let channel = TwitterChan.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
-          channel.send(TwitterName + "** tweeted: **" + url);
-        }).catch(err => {
-          console.log(err)
-        })
-      }
-    })})
+    if (tweet.in_reply_to_status_id ||
+      tweet.in_reply_to_status_id_str ||
+      tweet.in_reply_to_user_id ||
+      tweet.in_reply_to_user_id_str ||
+      tweet.in_reply_to_screen_name) {
+      return;
+    } else if (tweet.retweeted_status = TwitterName) {
+      let channel = TwitterChan.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
+        channel.send(TwitterName + " **retweeted: **" + url);
+      }).catch(err => {
+        console.log(err)
+      })
+    } else {
+      let channel = TwitterChan.channels.fetch(process.env.DISCORD_CHANNEL_ID).then(channel => {
+        channel.send(TwitterName + "** tweeted: **" + url);
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  })
+})
