@@ -1,21 +1,22 @@
 {
   "name": "discord-twitter-bot",
-  "version": "1.0.0",
-  "description": "A discord bot that sends messages to a channel whenever a specific user tweets.",
-  "main": "main.js",
+  "version": "1.1.0",
+  "description": "This bot will output your Tweets and retweets and filter out everything else and post them to Discord",
+  "author": "Azariel#0004",
+  "main": "TwitterChan.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start TwitterChan.js --name "TwitterChan"",
+    "stop": "pm2 stop TwitterChan"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mastashake08/discord-twitter-bot.git"
+    "url": "git+https://github.com/PrincessAkira/discord-twitter-bot"
   },
   "keywords": [
     "discord",
     "twitter",
     "bot"
   ],
-  "author": "mastashake08",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mastashake08/discord-twitter-bot/issues"
@@ -24,6 +25,7 @@
   "dependencies": {
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
     "twit": "^2.2.11"
   }
 }

@@ -1,7 +1,15 @@
 require('dotenv').config()
 const Twit = require('twit')
+const { exec } = require('child_process');
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const cron = require('node-cron');
+
+
+// CronJob every 24 Hours at 0:00
+cron.schedule('0 0 * * *', function() {
+  exec("pm2 restart TwitterChan")
+});
 
 
 var T = new Twit({
