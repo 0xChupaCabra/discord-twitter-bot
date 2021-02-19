@@ -11,10 +11,12 @@ git clone https://github.com/PrincessAkira/discord-twitter-bot && cd discord-twi
 
 3. Install the bot
 ```sh
- npm install -g pm2 && npm install
+ npm install -g pm2 && npm install && cp .env.example .env
  ```
 
-4. Start the Bot
+4. Fill out .env
+
+5. Start the Bot
 ```sh
 npm start
 ```
